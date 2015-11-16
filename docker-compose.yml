@@ -1,0 +1,35 @@
+elasticsearch: # see: https://hub.docker.com/_/elasticsearch/
+  image: elasticsearch:2.0
+  hostname: elasticsearch
+  domainname: elasticsearch.elk
+  volumes:
+    - ./data/elasticsearch:/usr/share/elasticsearch/data
+  ports:
+    - 9200:9200
+    # - 9300:9300
+  # see:  https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html
+  command: elasticsearch -Des.network.host=_non_loopback_ -Des.cluster.name=elk-cluster
+
+kibana: # see: https://hub.docker.com/_/kibana/
+  image: kibana:4.2
+  hostname: kibana
+  domainname: kibana.elk
+  ports:
+    - 5601:5601
+  environment:
+    - ELASTICSEARCH_URL=http://elasticsearch:9200
+  links:
+    - elasticsearch
+
+logstash: # see: https://hub.docker.com/_/elasticsearch/
+  image: logstash:2.0
+  hostname: logstash
+  domainname: logstash.elk
+  ports:
+    - 25826:25826
+  links:
+    - elasticsearch
+  volumes:
+    - ./data/logstash/conf:/etc/logstash/conf.d
+  # see: https://www.elastic.co/guide/en/logstash/current/configuration.html
+  command: logstash -f /etc/logstash/conf.d/logstash.conf
