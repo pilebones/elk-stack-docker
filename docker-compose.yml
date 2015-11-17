@@ -6,7 +6,6 @@ elasticsearch: # see: https://hub.docker.com/_/elasticsearch/
     - ./data/elasticsearch:/usr/share/elasticsearch/data
   ports:
     - 9200:9200
-    # - 9300:9300
   # see:  https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html
   command: elasticsearch -Des.network.host=_non_loopback_ -Des.cluster.name=elk-cluster
 
@@ -32,4 +31,4 @@ logstash: # see: https://hub.docker.com/_/elasticsearch/
   volumes:
     - ./data/logstash/conf:/etc/logstash/conf.d
   # see: https://www.elastic.co/guide/en/logstash/current/configuration.html
-  command: logstash -f /etc/logstash/conf.d/logstash.conf
+  command: logstash agent -f /etc/logstash/conf.d/logstash.conf
