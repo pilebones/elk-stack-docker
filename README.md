@@ -68,6 +68,12 @@ Add this line bellow to send all log entries to Logstash inside docker :
 ```bash
 *.* @@0.0.0.0:25826
 ```
+And restart rsyslog :
+```bash
+systemctl restart rsyslog
+```
+
+__Note :__ Any log client can push a log stream to logstash by this same way.
 
 ## Testing
 
