@@ -33,4 +33,4 @@ logstash: # see: https://hub.docker.com/_/logstash/
   volumes:
     - ./data/logstash/conf:/etc/logstash/conf.d
   # see: https://www.elastic.co/guide/en/logstash/current/configuration.html
-  command: logstash agent -f /etc/logstash/conf.d/logstash-tcp.conf
+  command: logstash agent -f /etc/logstash/conf.d/logstash-syslog.conf
