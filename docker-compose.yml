@@ -20,8 +20,10 @@ kibana: # see: https://hub.docker.com/_/kibana/
   links:
     - elasticsearch
 
-logstash: # see: https://hub.docker.com/_/elasticsearch/
-  image: logstash:2.0
+logstash: # see: https://hub.docker.com/_/logstash/
+  image: logstash:2.1 # Official clean docker-container
+  # If you want a custom logstash (with plugins for example) comment previous line and uncomment the line bellow : 
+  # build: build/logstash-with-plugins/
   hostname: logstash
   domainname: logstash.elk
   ports:
@@ -31,4 +33,4 @@ logstash: # see: https://hub.docker.com/_/elasticsearch/
   volumes:
     - ./data/logstash/conf:/etc/logstash/conf.d
   # see: https://www.elastic.co/guide/en/logstash/current/configuration.html
-  command: logstash agent -f /etc/logstash/conf.d/logstash.conf
+  command: logstash agent -f /etc/logstash/conf.d/logstash-tcp.conf
