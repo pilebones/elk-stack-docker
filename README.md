@@ -6,7 +6,7 @@
 - Logstash for centralized logging, log enrichment and parsing
 - Kibana for powerful and beautiful data visualizations
 
-## Requirements
+## Requirements
 
 - Docker
 - Docker Compose
@@ -75,7 +75,7 @@ systemctl restart rsyslog
 
 __Note :__ Any log client can push a log stream to logstash by this same way.
 
-## Testing
+## Testing
 
 ### To generate log entry for testing
 ```bash
